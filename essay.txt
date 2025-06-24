@@ -1,91 +1,456 @@
-Retrieval-Augmented Generation: A Comprehensive Analysis of Modern AI Systems
+Platform Handover
+Platform Scope as of EO’24
+Billing
 
-Introduction
+Currently, Billing is with Pawel and there are recurring issues: i.e. finance always needs support with invoice creation
+many of these tasks are highly critical and urgent, as it can happen that they block single, multiple or all invoice creations.
+Pavel is the only knowledgeable person in the company
+All requests are raised in
+Billing issues exploration has begun and documented here but paused due to shifting priorities and billing not being in the
+focus for 2025
+POC in Finance: Mario and Adriana from Finance. Riya supports on the technical side for salesforce/abe sync.
+Lot of manual work done by Finance: adjustments end of the month, sending them to customers, etc. These issues have been
+explored here
+Pawel’s documentation: some steps have been logged in slack
+Programmatic billing program issues:
+many clients want decrease prices when they ramp up locations, e.g. where 1-500 locations are charged X, 501-1000
+charged Y and 1001+ charged Z where X>Y>Z. This is currently not supported but it has been applied to some partners
+other clients have contracts where first X locations are for free, and the rest are billed
+DealHub: reporting capabilities, margins, understand financials. We want to introduce packages here. is leading this.
+POCs
+Finance: Adriana Merella, Mario Kirchner
+Engineering: Pawel and Primo
+IT ops - Harald
 
-Retrieval-Augmented Generation (RAG) represents a paradigm shift in artificial intelligence, combining the power of large language models with external knowledge retrieval to create more accurate, factual, and contextually relevant responses. This hybrid approach addresses one of the fundamental limitations of traditional language models: their static knowledge cutoff and inability to access real-time or domain-specific information. RAG systems have emerged as a critical solution for applications requiring up-to-date information, factual accuracy, and domain expertise.
+Reseller topics
+Partner Integrations (Wix, Duda, Vendasta, 1&1 (IONOS))
+Usually the work on these integrations is not much or often, but it takes a lot of time to deliver stories, due to many back-and-forth
+issues (bugs or unhalded behavior on Uberall or partner’s side), communication delay (alignment between contact points and
+devs), etc. Every partner usually has a dedicate PAM (partner account manager) and a dedicated channel for communication.
 
-The fundamental architecture of RAG consists of two primary components: a retrieval system that searches through external knowledge sources and a generation system that produces responses based on both the retrieved information and the model's pre-trained knowledge. This dual approach enables RAG systems to provide more reliable, verifiable, and contextually appropriate responses compared to standalone language models.
+Wix
+https://uberall.com/en/admin/salesPartner/details/3144
+Active partnership, current development underway . They’re bringing good revenue due to Uberall being put in a “premium
+package”, which is “subsidised” by Wix. This means SMB (end users) are getting uberall for free, and Wix is paying for us. We
+anticipate large churn at the end of the year-end SMB contracts as SMBs are not really well onboarded on Uberall.
+Overall healthy partnership, Wix can be very demanding and not fully aware of what we’re doing and how we’re working, so it
+requires a bit of “hand-holding” and guiding them.
+When small changes are made to the app (icon, marketing content) we can publish the new version fo the app immediately,
+but for bigger (workflow) changes we need the app to get approved
+the app approval is done by the partner integration manager or project manager, we can send a message in #wix-uberall
 
-Historical Context and Development
+Duda
+Duda https://uberall.com/en/admin/salesPartner/details/1104
+Duda has been an active partner for long time, but hasn’t brought much revenue. Recently, a new agreement was signed ( Duda
+internal business case ) that given we built a 2-way sync ( ) they will commit to bigger volumes. The updated solution went live
+in OCT-2024.
+Overall, they always prefer us to build everything, justifying that we’re the partner (= they’re paying us) and mentioning they can
+look for other vendors.
 
-The concept of combining retrieval with generation in natural language processing has evolved significantly over the past decade. Early approaches focused on simple document retrieval followed by template-based response generation. However, the advent of transformer-based language models and advances in information retrieval techniques have enabled more sophisticated integration between these components.
+Vendasta
+This has been the least problematic partner, without any bugs or development requests.
+Communication channel
+https://uberall.helpjuice.com/pi-tech/607007 Technical documentation
 
-The term "Retrieval-Augmented Generation" was popularized by Lewis et al. in their 2020 paper, which introduced a framework for combining dense retrieval with sequence-to-sequence generation. This work demonstrated that RAG systems could outperform traditional language models on knowledge-intensive tasks while maintaining fluency and coherence in generated text.
+IONOS (1UND1)
+Oldest and formerly biggest reseller of Uberall. Recently (2024) they’ve churned new business, and are supporting only existing
+business. Expectations and future needs need to be aligned with the PAM.
+We support various custom processes for them, all outlined in the technical documentation.
+Occasionally they raise issues for example not being able to purge (delete) a location, e.g.:
+Hi Uberall, we have another 500:
+https://uberall.com/provisioning/brands/ONE_AND_ONE/customers/0a19a2a8-7155-449a-b0b7545c300bbe18/items/82bc942e-181b-45ec-9833-5b5250bcf1b4/purge
 
-Since then, RAG has become increasingly prevalent in commercial applications, with major technology companies implementing RAG-based systems for customer service, content generation, and information retrieval. The approach has proven particularly valuable in domains where accuracy and timeliness are critical, such as healthcare, finance, and legal services.
+In this case you can grab the second id 82bc942e-181b-45ec-9833-5b5250bcf1b4 and check the business by the identifier, find
+the location and see if it can be deleted on Sandbox. If yes maybe it’s an intermittent issue, if the issue persists, you can either
+manually delete the location on Prod or raise a bug ticket.
 
-Architecture and Components
+Whitelabel implementation
+A whitelabelling setup can be applied for both resellers and direct clients, but most commonly for resellers. It’s all documented in
+https://uberall.helpjuice.com/reseller-whitelabel/408386 and in https://uberall.helpjuice.com/reseller-whitelabel/408386
 
-RAG systems typically employ a three-stage pipeline: indexing, retrieval, and generation. The indexing stage involves processing and storing external knowledge sources in a format optimized for efficient retrieval. This often includes creating dense vector representations of documents using encoder models, which enable semantic similarity searches.
+Whitelabel colors and branding
+Many whitelabels can be set per SP, but only 1 can be applied to the user. As seen from the screenshot. We use this information to
+determine the whitelabel colors when we send emails.
+This means that clients ensure that they always log in via their own URL e.g. https://uberall.com/en/app/yellowpages/login so that
+the correct whitelabel information is loaded.
 
-The retrieval stage identifies the most relevant documents or passages from the knowledge base given a user query. This can be accomplished through various methods, including sparse retrieval (e.g., BM25), dense retrieval using neural encoders, or hybrid approaches that combine multiple retrieval strategies. The retrieved documents are then ranked and filtered to select the most relevant information for the generation stage.
+Whitelabel custom subdomains
+Clients can also set their own custom subdomain to remove any uberall.com references. Once set, clients can login on their own
+website.
+The setup is initiated when all the necessary info is filled in on the SP whitelabel page. Then we create a custom deploy of the
+instance in Jenkins – directly from ABE. A START button appears with guidelines on what to do. Then the whitelabel instance is
+created.
+Clients can optionally set a custom subdomain. To do that, we need to fill in Whitelabel Subdomain of the Partner then the
+custom subdomain can begin verification. The client needs to adjust some DNS settings in their DNS dashboard, and then another
+VERIFY button will appear.
 
-The generation stage combines the retrieved information with the user's query to produce a coherent and accurate response. This typically involves a large language model that has been fine-tuned to incorporate external knowledge effectively. The model must learn to balance information from the retrieved documents with its pre-trained knowledge, ensuring that the final response is both factual and contextually appropriate.
+Once clicked, we check the DNS setup and verify the domain.
+Once verified, also emails can be sent on behalf of the client.
 
-Key Advantages and Benefits
+NM360
+NM360 is a tool developed through the year to replace the old status check tool, and to serve as a lead generation tool. It was
+designed to be an entry point for clients to try out uberall.
+The high-level flow is:
+1. Client performs a (bulk) near me check tool
+2. They’re served the results of this check which explains what’s their standing and potential risks and benefits
+3. The client can convert via a Self service checkout (this was partially built but never launched, code is existing)
+Due to former PMs leaving and the tool not having a clear path forward, no new work has been prioritised. There are some
+notable clients using the tool (full list here), most notable TSI has signed up with us for this tool. Few other resellers also rely on it,
+too.
 
-RAG systems offer several significant advantages over traditional language models. First and foremost, they address the knowledge cutoff problem by enabling access to current information. This is particularly important for applications requiring up-to-date data, such as news analysis, financial reporting, or technical documentation.
+High-level technical overview
+The high-level flow is explained in this flowchart.
+In a nutshell, the process is:
+1. User enters the data (API or FE widget) and we normalize it
+2. We use the status check to make the requsts to the various directories and get the standing of the listing
+3. We collate the data and run some processes to calculate scores
+4. We serve the score either via report in the FE or via calling the report endpoint in the API ( )
 
-Second, RAG systems improve factual accuracy by grounding responses in verifiable sources. This reduces the likelihood of hallucination, a common problem with large language models where they generate plausible but incorrect information. By retrieving relevant documents, RAG systems can provide citations and evidence for their responses, increasing transparency and trustworthiness.
+Known issues and ideas for improvements
+1. Quotas. Currently the near me check has no protection against misuse. These will be introduced in or in given the first one
+doesnt work
+2. Quotas on directories. We have a finite number of calls that we can make to the various directories. For some of them it’s not
+possible to increase the amount of calls we can perform. If we get more people on the NM360, we will also have increaed
+usage and we may reach a point where we often hit our limits. We need to figure out how to handle this. Potential solutions:
+a. dynamic job scheduling based on certain codntions
+b. prioritise certain calls among other
+c. have dynamic refresh on reports to ensure delayed results are taken into the results
+3. Parallel processing. The service has not been proven to be scalable. This needs to be checked and invest more into better
+parellel processing
+4. Disable heavy processes. We’re currently running competitor data (extra calls) that allows us to calculate some extra metrics.
+This adds extra load, and is used only by TSI (this needs to be revalidated). There’s a story to disable the competitor data by
+default and
+5. Discontinue the status check widget. Currently most clients use the status check widget. It’s outdated and it has very limited
+functions. If we want to discontinue it, we need to introduce a similar widget for the NM360 (see status check widget
+configuration)
 
-Third, RAG enables domain-specific customization without requiring extensive retraining. Organizations can simply update their knowledge base with relevant documents, allowing the system to provide specialized information without modifying the underlying language model. This makes RAG particularly valuable for enterprise applications where domain expertise is critical.
+External tools and product integrations - Product
+We have integrated a bunch of scripts, external tools and widgets. We load manty of them on all environments (dev, sandbox,
+production), but not all. Loading a widget on non-prod environments allows testing it and changes can be safely made prior to
+landing on prod. However, we need to ensure any data, especially for tracking/analytics is also correctly captured. Different tools
 
-Fourth, RAG systems can handle long-form content more effectively than traditional language models, which often have context length limitations. By retrieving relevant passages, RAG can process and synthesize information from documents that exceed the model's maximum input length.
+handle it differently - some can identify the domain, for other we need to do extra work during the implementation to mark a user
+as non-prod.
+For every widget and script, we need to define the parameters that we send over which helps us enrich the default segmentation
+and better identify our users using our terminology (e.g. Product Plans, User features, etc.). This analysis what to send and the
+mapping is usually done by the PM in the implementation phase.
 
-Applications and Use Cases
+Accesibility & Widget
+We’re using a 3rd party tool to ensure higher degree of accessibility. Overall there’s little adoption as we’ve partnered with this
+company to enable RFPs for companies in the public sector as for them this is a must.
+We haven’t pushed for winder adoption as most clients don’t need this tool and the tool can alter some pages in a negative way.
+The underlying issues are related to the page design (.gsp pages, non-zenitifed components) and some icons not being .svg
 
-RAG systems have found widespread application across numerous domains. In customer service, RAG-powered chatbots can access product documentation, FAQs, and knowledge bases to provide accurate and helpful responses to customer inquiries. This reduces the need for human intervention while improving customer satisfaction through more relevant and accurate information.
+Pendo
+We use Pendo for in-app communications and product analytics. At some point, there was an idea to integrate Pendo more deeply
+by enabling the Pendo Resource Center - a permanent place for Guides, Onboarding milestones and other Support materials. This
+initiative did not gain ground due to concerns from Support, since there was a risk to duplicating content and there was no clear
+direction.
+Currently, we power Pendo’s in-app notification, tracking and analytics by loading a script in our platform. Recently, we’ve built
+custom logic to identify support, internal, and non-prod users.
 
-In healthcare, RAG systems can assist medical professionals by retrieving relevant research papers, clinical guidelines, and patient records. This enables more informed decision-making while ensuring that recommendations are based on current medical knowledge and best practices.
+Beamer
+We use Beamer as purely an in-app communication tool. Beamer is also placed in the side nav under “Notifications” and upon
+clicking, it opens a sidebar where
+Right now, Beamer greatly duplicating Pendo in terms of it’s goals, so we’ve repositioned Beamer as a “changelog” and “new
+release” communication. It’s primarily used by Product Marketing (Ruxandra). Additionally, Beamer is rather cheap, but in the
+future it can be replaced fully by Pendo.
+There’s is a an issue with the implementation, explained here https://uberall.atlassian.net/issues/PL-2115
 
-In legal services, RAG can help lawyers and legal professionals by retrieving relevant case law, statutes, and legal precedents. This accelerates legal research and ensures that legal advice is grounded in current and applicable legal frameworks.
+Configcat - release feature flagging
+The feature has been implemented and maintained by Rabie and Ayelen, so platform has not been the owner of this.
 
-In education, RAG systems can provide personalized tutoring by retrieving relevant educational materials and adapting explanations to individual student needs. This enables more effective learning experiences while ensuring that information is accurate and up-to-date.
+Platform Integrations - Workato
+A very new product that is still being implemented. All of it has been documented in the linked doc. Ani Babajanyan is leading the
+project in terms and is fully onboarded and knowledgeable.
+For workato, Ruben has transformed our documentation from custom-uberall built to universal open API format. This allows the
+Workato platform to automatically recognise our API structure and make use of our endpoints without needing to manually
+refresh the structure.
+There’s an active epic, and the prototype is currently being developed. Currently what more needs to be developed is:
+control mechanisms to activate/deactivate the product
+the full connection with Workato
 
-In content creation, RAG can assist writers and journalists by retrieving relevant background information, statistics, and source materials. This improves the quality and accuracy of generated content while reducing research time.
+External tools - Support
+Salesforce support Web form to Case
 
-Technical Challenges and Limitations
+Together with the SF team in Ubreall, we’ve implemented a widget that shows the Support form in Uberall. Once the form is
+submitted, a new case is created in Uberall. There hasn’t been any requests, but at some point we may want to introduce extra
+languages - right now we support only English for the form’s fields.
 
-Despite their advantages, RAG systems face several technical challenges that must be addressed for optimal performance. One of the primary challenges is retrieval quality, which directly impacts the accuracy of generated responses. Poor retrieval can lead to irrelevant information being incorporated into responses, reducing overall quality.
+Livechat
+The Livechat widget is also supported by the Salesforce team. It’s a snippet that is loaded and is shown in the support section.
+There haven’t been any new requests or any bugs with this. It’s stable.
 
-Retrieval quality depends on several factors, including the quality of the knowledge base, the effectiveness of the retrieval model, and the relevance ranking algorithms. Ensuring comprehensive coverage of the target domain while maintaining high-quality, up-to-date information requires significant ongoing effort and resources.
+Knowledgebase setup
+Our knowledgebase solution is provided by HelpJuice. We’ve integrated an iframe that is shown under the Kwoledgebase section.
+We determine what to show based on the role of the logged in User. We’re controlling the visibility of the content per article - the
+public is available for everyone, and internal is only for Ubreallers.
+Overall, the implementation is stable and there hasn’t been any issues. The issues that have appeared have been usually
+originating from HelpJuice’s side.
 
-Another challenge is the integration between retrieval and generation components. The retrieved information must be effectively incorporated into the generation process without disrupting the fluency and coherence of the response. This requires careful tuning of the generation model and potentially specialized training approaches.
+Core platform topics
+Webhooks (event service)
+Webhooks (event service) was revamped in the beginning in 2024 - epic link. We’ve covered many client requests, made if
+accessible in the FE, it’s stable and very rarely (almost never) we have any issues. There’s an alert channel that feeds from this
+observability/monitoring dashboard. Monitor it once in a while for any issues, unfortunately currently it cannot notify only for
+“errors”, it shows all events.
 
-Context length limitations remain a challenge, particularly when dealing with long documents or multiple retrieved passages. While RAG can help address this by retrieving relevant portions of documents, there are still practical limits on how much retrieved information can be effectively incorporated into a single response.
+Keys, localization, translations & languages
+The platform team is responsible for the entire framework of creating keys in the platform, i.e. the actual text/labels that we and
+our clients see, the localization process in the various languages and the translations process. Additionally, the platform team is
+leading the introduction of any new languages to the platform with the PM doing the Localise ordering.
 
-Privacy and security concerns also arise when RAG systems access external knowledge sources. Organizations must ensure that sensitive information is properly protected and that access controls are implemented to prevent unauthorized retrieval of confidential data.
+Keys creation and updates
+Every team creates their own keys to be used on their own pages. The platform team is responsible for the underlying process
+that supports this. Most recently (epic link), we improved the process to create new translation keys and we’ve removed overhead
+on engineering, made it easier for the engineering team to create new keys. In a nutshell the process is:
+1. Frontend creates the keys (codes) - ensure these conditions are met, otherwise keys won’t be sent for translation
+a. we do this because we don’t want to translate all keys, e.g. ABE, API docs, another internal stuff
+2. Keys get created in the DB - you can use the “Import messages” either Single key import or Bulk
+https://uberall.com/en/admin/message/messageImport - used for both key creation and key updates
+3. Add text for the keys - you can do this either in the dashboard 1 by 1 https://uberall.com/en/admin/message/ or via the bulk
+import https://uberall.com/en/admin/message/messageImport
 
-Evaluation and Metrics
+Translations
+They’re handled by Localise, after the specific language has already been launched and present in the platform. Localise offers
+manual translations by translators which are rather expensive (~10k USD to translate a language) or machine translations (Google
+/ DeepL) which are ~100 USD. We use the manual translations for high visibility and importance languages (French, German,
+Spanish, etc.) and the machine translations for less important languages.
 
-Evaluating RAG systems requires a comprehensive approach that considers both retrieval and generation quality. Traditional metrics for information retrieval, such as precision, recall, and mean reciprocal rank, are important for assessing the quality of the retrieval component.
+Cost
 
-For the generation component, metrics such as BLEU, ROUGE, and BERTScore can be used to evaluate fluency and coherence. However, these metrics may not fully capture the factual accuracy and relevance of RAG-generated responses.
+Person (manual)
+translations
 
-Human evaluation remains crucial for assessing the overall quality of RAG systems. This typically involves human annotators evaluating responses for accuracy, relevance, fluency, and helpfulness. Human evaluation can identify issues that automated metrics may miss, such as subtle factual errors or inappropriate tone.
+Machine
+translations
 
-Recent research has also introduced specialized metrics for RAG evaluation, such as faithfulness (measuring how well the response reflects the retrieved information) and answerability (measuring whether the retrieved information is sufficient to answer the query).
+High
 
-Future Directions and Research Opportunities
+Low
 
-The field of RAG continues to evolve rapidly, with several promising research directions emerging. One area of active research is improving retrieval quality through more sophisticated retrieval models and ranking algorithms. This includes exploring multi-modal retrieval, which can incorporate images, audio, and other media types alongside text.
+Translation delivery Days to weeks
+speed
+depending on size
+(~25 business days
+for a full language)
 
-Another promising direction is the development of more efficient RAG architectures that can handle larger knowledge bases and provide faster response times. This includes research into approximate retrieval methods, caching strategies, and distributed retrieval systems.
+Minutes
 
-Personalization and adaptation represent another important research area. Future RAG systems may be able to learn user preferences and adapt their retrieval and generation strategies accordingly. This could enable more personalized and contextually appropriate responses.
+Accuracy
 
-Integration with other AI technologies, such as reasoning systems and knowledge graphs, could further enhance RAG capabilities. This could enable more sophisticated reasoning about retrieved information and better integration of structured and unstructured knowledge.
+High - usually no or Medium - more
+very few changes
+changes are
+are needed
+needed
 
-Ethical considerations and responsible AI development will also be crucial for the future of RAG. This includes addressing issues of bias in retrieval and generation, ensuring transparency in information sources, and developing methods for detecting and mitigating misinformation.
+Keys with
 
-Conclusion
+Dynamic values
+are respected and
+preserved
 
-Retrieval-Augmented Generation represents a significant advancement in artificial intelligence, offering a practical solution to many of the limitations of traditional language models. By combining the power of large language models with external knowledge retrieval, RAG systems can provide more accurate, factual, and contextually relevant responses.
+Dynamic values
+are translated and
+overwritten and not
+respected
 
-The widespread adoption of RAG across various domains demonstrates its practical value and potential for impact. However, realizing the full potential of RAG requires addressing technical challenges, developing appropriate evaluation methods, and ensuring responsible deployment.
+Automation and
+ingestion of
+translation results
 
-As the field continues to evolve, RAG systems are likely to become increasingly sophisticated and capable. Future developments in retrieval quality, generation integration, and system efficiency will enable new applications and use cases that are currently beyond reach.
+Keys are
+automatically fed
+back to the
+platform with
+webhooks
 
-The success of RAG also highlights the importance of hybrid approaches in artificial intelligence, where combining multiple techniques can achieve better results than any single approach alone. This lesson is likely to influence the development of other AI systems and applications in the years to come.
+Keys need to be
+manually
+processed remove any keys
+(rows) with
+dynamic content
+and load the other
+keys in the platform
+via bulk import
 
-Ultimately, RAG represents not just a technical innovation but a fundamental shift in how we think about AI systems and their relationship with knowledge. By enabling AI to access and utilize external information effectively, RAG opens new possibilities for creating more intelligent, useful, and trustworthy AI applications that can better serve human needs and goals. 
+Manual effort
+
+Very low
+
+High
+
+[$directory]
+
+values
+
+Often certain deals can be unblocked by introducing the necessary language.
+Currently there are 2 languages that are pending and have been negotiated for Q1 - Korean (SF gap) and Mandarin (SF gap)
+Updating translations
+Often colleagues or clients would raise some feedback about certain text not being translated or requiring change of the
+translation. Then you can search for the current text in the https://uberall.com/en/admin/message/dashboard find the key and
+
+modify the value. Sometimes, there may be more than 1 key that may have the same translation, so you would need to determine
+which key by correlating the name of the key with the section where it’s found.
+
+Knowing issues and long-term plans
+Discovery work around translation has been conducted and documented in here. Most issues are grouped in the following
+categories:
+Translation quality - sometimes the translations lack the correct context. This can be addressed by bringing the page
+(screenshot) or more context of the placement of the label
+Discrepancies between languages - sometimes the English vs other language translations are not matching or have different
+meanings. This can happen when the English label is translated, but the localizatioed version (translations) aren’t.
+this is also complicated because the translation process is not restricted and many roles can adjust translations
+Order placement in the translation management system (TMS) - currently this is a manual process since there are costs
+involved and decisions need to be made on which keys and target languages need to be requested
+
+Users, user management and user access
+The platform team has been the owner of everything User management and User Groups. The team is involved in the user
+lifecycle. User statuses can only be set and changed in the API or ABE (something that can be changed in the future).
+The user lifecycle (status) is directly and email settings are directly related to the Email communications that we send. Also, the
+user status dictates whether the user is allowed or not to log in the platform.
+Roles dictate the “power” a User gets. Admins by default can see all locations, and have power access to certain features that
+can be limited only to them. This is specific per product, but mostly it’s around the Org settings. Admins can, but are not limited to
+adjust everything in the Org section (API keys, Groups, Single Sign On, Billing, and Webhooks). Generally Admin users can
+overwrite data and actions done by lower roles, while lower roles are equal among each other and can edit only All other roles
+see a more restricted views.
+User access to features and modules
+This is dictated by the User features permissions and these can vary per User, regardless of the role. This means that we can
+orchestrate which products are activated for every single user. What’s important to mention that some features require the feature
+to be activated also in the Product Plan.
+All of this is documented extensively in the links
+
+Emails
+In 2024 we’ve launched an initiative to migrate the existing emails and the underlying infrastructure to AWS SES from Sendgrid.
+The main objectives were to 1) tackle technical debt, 2) prepare emails for scalability with better cheaper pricing per volume and
+3) redesign the emails for a modern look and feel.
+Due to an underestimated complexity and increased delivery timelines, the scope has been deprioritised.
+Engineering is using an external service (sovy.app) to create the design templates which SES uses.
+
+Migrating to SES - current status
+So far, majority of the emails are ready to be activated on the new service (11 emails, full list here). There are some activation
+criteria that need to happen:
+Add the emailTypes - https://uberall.com/en/admin/configuration/details/6658
+Add the salesPartnerIds - https://uberall.com/en/admin/configuration/details/6657
+All emails mentioned in the ticket above can be activated for clients that do not have any custom domains. If a client has a
+custom domain (DNS) then we will fallback to the old Sedngrid flow. Note that not all emails are migrated, outlined below
+
+Migrating to SES - what’s left to be done
+Remaining emails
+There are few emails that have not been built in Sovy and migrated. These are the Digest email, New reviews emails (unread
+reviews), Google verification emails. What’s missing for these emails is to create the template in Sovy - the various components
+that build the template itself.
+For the digest email
+The digest email has too much business logic built in the email itself so we’ve decided it’s too much effort to revamp every piece.
+Instead, we want to focus on aligning some of the styles and email elements to look closer to the new branding guidelines and
+directly inject the .html template in SES, instead of using Sovy.
+Custom subdomains - DNS verification process
+Last piece of the puzzle is to recreate the DNS verification setup that clients have done so that we can start sending emails from
+Amazon SES instead of Sendgrid on behalf of clients.
+We have extracted a list of clients with a verified subdomain with Sendgrid (±276, note some of these SPs are already inactive).
+We need to reach out to them (their admins / owners) and share instructions what they need to do and the timelines. A high-level
+approach would be:
+1. Inform clients why this is happening - we’re switching email services
+2. Inform them what they need to do - in their DNS settings they need to add the new key-pairs
+3. Inform them of the timelines that we envision - e.g. you have X amount of time to comply
+a. if you don't migrate you will start receiving emails from notifications@uberall.com instead of your own domain
+
+Login Page
+The login page has had a face uplift to apply new branding in the epic . The login page is still in .gsp and it’s not using any of the
+FE framework (React). Much of these changes have been logged in the
+The login page also dictates whether a user can log in via SSO
+
+Login page message
+In the same epic we’ve added a new marketing message that can be modified from the new section in ABE under Marketing →
+“Login page”
+We can specify the image URL and the CTA behind it. There’s an option to have it specific per language, or to apply for all
+languages. The option to delete allows us to remove the message
+
+Custom navigation for clients
+For a handful of clients, we have built custom elements (buttons) in the navbar. These have been requested during the sales or
+onboarding process. The long term vision / strategy was to convert this into a productised feature, where clients can set these
+links directly in the platform in a self service manner.
+
+New / old navigation
+In 2024 we redesigned the navigation experience to remove clutter, and duplication and to standardise the user flows. As a result,
+we removed many horizontal tabs on the single location view page e.g.
+https://uberall.com/en/app/uberall/locationEdit/$locationId/datareview for Profile Suggestions. All sub-products were moved on
+the side navigation to consolidate the user experience for single location vs multi location managers or admins, etc.
+On the horizontal tab (navigation) we should keep only products that do not have a landing page or require a location, e.g.
+Location (Website) Widgets. On he vertical (side) bar we should be putting by default any new products.
+
+Adoption and next steps
+As of mid-December 99% of clients were moved with the exception of few ones which have had different reason (see Navigation
+- clients on old dashboard and to understand the problem better)
+The navigation activation is managed via the ConfigCat flag.
+Going forward, the remainder of old clients need to be migrated too by bridging the expectations gap. We should generally
+communicate that any new features will be shipped only on the new nav experience and any bugs won’t be fixed on the old nav.
+
+Security & 2-factor authentication
+2FA
+Our platform supports 2-factor authentication with email as a second factor of authenticating. RIght now the adoption is low
+because we never had a proper GTM and launch communication. This is something that we can communicate more.
+The activation is governed by this flag https://uberall.com/en/admin/configuration/details/5565. We may decide to remove the
+reliance on this flag, but there’s no clear decision whether it should be widely avaialble or restricted to some package. See
+conversation here
+
+Password settings / SOC2 certification
+As part of SOC2 we would need to strengthen the password set up process in Uberall. Some of the requirements have bee
+captured in this ticket. We do have some default password settings per SP (field Minimum Password Length that can overwrite the
+default setting, so length-wise we can easily adjust it, but it does not capture the remaining criteria. Furthermore, we would need
+to implement a “password expiration” flow that would prompt users with non-compliant passwords to set a new password.
+POC here is
+
+ABE (SPs, product plans)
+The platform team supports some ABE pages, specifically the Sales Partner and Product Plan pages. For Sales Partner, different
+squads also tend to add their own sections. The team was owner of the page and the Sales Partner model (object).
+The same applies also for the Product Plan page.
+
+Developer and cross-functional topics
+Performance
+The team has been the team responsible for initiating and driving projects that aim at improving the performance of the platform.
+Such projects are developers-led and have a distributed nature - each engineering squad does the work for which they are
+responsible.
+
+Zenit
+Majority of Zenit work is handled by various stakeholders. Mohammed and Amr are active contributors to the project and work
+independently of the PM to prioritise work. We’re discussing tickets that need to fit our sprints and discuss capacity, but
+everything else is decided independently of the PM.
+
+Rebranding 2.0 - pointers for next iteration
+In end of 2024 we rebranded the platform and applied the purple colors. We have modified many of the pages to standardise
+buttons and shapes.
+For 2025 we can consider doing a second iteration to tackle the UX/UI debt we have and:
+
+ensure all pages are building using the Frontend framework React and Zenit, remove app legacy .gsp pages
+address all loading spinners and standardise them across the pages
+ensure all page structures are aligned (Top bar header, H1 elements, forms)
+Action button are aligned in terms of wording and actions
+Emtpy/blank screens are systematic
+
+Other
+Manual Tasks
+A variety of manual task have been under the platform PM. Some of them are:
+finalizing orders for translations - the process is outlined here
+modifying labels / translations - explained in
+quarterly bulk activations via the Bulk Product Plan features tools or Bulk User features tools
+
+Demo Accounts
+In the past we have tried to create a demo account process where it would refresh an already existing data in a single SP so that
+it remains fresh. Unfortunately, the process was too complex - specifically creating this dummy data was very problematic
+(analytics, data points, reviews) and was heavy on the individual squads to create this dummy data. As such, we’ve resorted to
+having an demo account https://uberall.com/en/admin/salesPartner/details/476 where we activate all features, at least for this
+admin user.
+
+Internal tools
+Bulk user and product plan updates
+The platform team has been responsible for the bulk user and product plan updates toolshttps://uberall.com/en/admin/bulkFeature/USER/list and https://uberall.com/en/admin/bulkFeature/PRODUCT_PLAN/list
+The tool is documented here and and is used in the quarterly activation for features.
+
+Bulk User import
+The bulk user import allows creating and updating users with an excel file. It’s predominantly used when you need to create in
+bulk new users for a new implementation or a client has asked to update many users' details which cannot be handled by the
+above two tools - e.g. user roles, user personal details, etc.
+
+
