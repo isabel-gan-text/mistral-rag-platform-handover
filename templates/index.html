@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAMPLE RAG CHATBOT</title>
+    <title>Platform Handover Bot</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
     <div class="chat-container">
-        <div class="chat-header">
-            <h1>SAMPLE RAG CHATBOT</h1>
+        <div class="chat-banner">
+            <img src="https://images.g2crowd.com/uploads/optimized_product_banner/image/10015/00ffd990f870b76a74b0b1bc145b8f02.jpg" alt="Banner">
         </div>
+        <div class="chat-header">
+            <h1>Platform Handover Bot</h1>
+        </div>
+
         <div class="chat-messages" id="chat-messages">
             <div class="message bot">
-                Welcome to the RAG Chatbot. I am ready to answer your questions about the text I've been trained on.
+                Welcome to the Platform Handover Bot. I am ready to answer your questions about the text I've been trained on.
             </div>
         </div>
+
         <div class="chat-input">
             <form id="chat-form">
                 <input type="text" id="user-input" placeholder="Enter your question..." required>
@@ -27,20 +34,17 @@
     <script>
         document.getElementById('chat-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const userInput = document.getElementById('user-input');
             const question = userInput.value;
             const submitButton = e.target.querySelector('button');
-            
-            // Disable the submit button while processing
+
             submitButton.disabled = true;
-            
-            // Add user message to chat
+
             addMessage(question, 'user');
             userInput.value = '';
-            
+
             try {
-                console.log('Sending request to server...');
                 const response = await fetch('/ask', {
                     method: 'POST',
                     headers: {
@@ -48,21 +52,15 @@
                     },
                     body: JSON.stringify({ question: question })
                 });
-                
-                console.log('Response received:', response);
-                
+
                 if (!response.ok) {
                     const errorData = await response.json();
                     throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
                 }
-                
+
                 const data = await response.json();
-                console.log('Data received:', data);
-                
-                // Add bot response to chat
                 addMessage(data.answer, 'bot');
-                
-                // Add context if available
+
                 if (data.context && data.context.length > 0) {
                     addMessage('Context used:', 'system');
                     data.context.forEach((chunk, index) => {
@@ -70,10 +68,8 @@
                     });
                 }
             } catch (error) {
-                console.error('Error details:', error);
                 addMessage(`Error: ${error.message}`, 'error');
             } finally {
-                // Re-enable the submit button
                 submitButton.disabled = false;
             }
         });
@@ -88,4 +84,5 @@
         }
     </script>
 </body>
-</html> 
+
+</html>
