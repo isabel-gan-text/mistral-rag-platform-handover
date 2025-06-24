@@ -70,13 +70,6 @@ When asking about a project, please include:
 - Urgency level
 - Any error messages or logs
 
-## Key Contacts
-
-- **Platform Team Lead**: [Name] - @username
-- **DevOps Lead**: [Name] - @username  
-- **Architecture Review**: [Name] - @username
-- **Viktor (Original Owner)**: Available for transition questions until [date]
-
 ## Important Notes
 
 ⚠️ **Transition Period**: Some projects may still be in active handover. Check individual project status before making changes.
@@ -96,13 +89,10 @@ To update project information:
 ## Support
 
 For urgent platform issues:
-- **Slack**: #platform-support
-- **On-call**: Check PagerDuty rotation
-- **Email**: platform-team@company.com
+- **Slack**: #ask-eng-acmo
 
 For handover-specific questions:
-- **Slack**: #viktor-handover
-- **Direct**: @viktor (transition period only)
+- **Direct**: @gnisabel_
 
 ---
 
