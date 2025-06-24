@@ -1,71 +1,109 @@
-# RAG Chatbot with Mistral AI
+# Platform Handover Documentation
 
-A Retrieval-Augmented Generation (RAG) chatbot built with Flask and Mistral AI.
+A comprehensive documentation system for platform projects handed over from Viktor, designed to help team members understand project status and details.
 
-**Created by [Halim Madi](https://www.halimmadi.com)**
+## About This Handover
 
-This is a sample project designed for students, workshops, and educational purposes. Feel free to use, modify, and distribute this code as you wish for learning and development.
+This repository contains documentation and status information for all platform projects that were transitioned from Viktor's ownership. The purpose is to provide clear visibility into existing projects, their current state, and enable team members to ask informed questions about specific project details.
 
-## About the Creator
+## Project Overview
 
-- **Website**: [www.halimmadi.com](https://www.halimmadi.com)
-- **Instagram**: [@yalla_halim](https://www.instagram.com/yalla_halim/)
+This handover documentation covers:
+- Current status of all platform projects
+- Project dependencies and relationships
+- Key technical details and architecture decisions
+- Outstanding issues and next steps
+- Contact information for domain experts
 
-## Setup
+## Getting Started
 
-1. Clone the repository
-2. Create a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Create a `.env` file with your Mistral API key:
-   ```
-   MISTRAL_API_KEY=your_api_key_here
-   ```
-5. Add your text file as `essay.txt` in the project root
+### Prerequisites
+- Access to the platform infrastructure
+- Relevant permissions for project repositories
+- Understanding of the platform architecture
 
-## Local Development
+### Quick Start
+1. Browse the project summaries below
+2. Review individual project documentation in their respective folders
+3. Check the status dashboard for current project health
+4. Refer to the FAQ section for common questions
 
-Run the Flask application:
-```bash
-python app.py
-```
+## Platform Projects Summary
 
-The application will be available at `http://localhost:5001`
+### Project Status Legend
+- 🟢 **Active**: Currently maintained and developed
+- 🟡 **Maintenance**: Stable, minimal changes expected
+- 🔴 **Deprecated**: Scheduled for retirement
+- 🔵 **Migration**: In process of being transferred or updated
 
-## Deployment to Vercel
+### Handed Over Projects
 
-1. Push your code to GitHub
-2. Connect your GitHub repository to Vercel
-3. Add your environment variables in the Vercel dashboard:
-   - `MISTRAL_API_KEY`: Your Mistral API key
-4. Deploy!
-
-## Environment Variables
-
-- `MISTRAL_API_KEY`: Your Mistral AI API key (required)
+*Note: Detailed project information should be added here based on the specific projects from Viktor's handover*
 
 ## Project Structure
+```
+/
+├── projects/                 # Individual project documentation
+│   ├── project-alpha/       # Project-specific details
+│   ├── project-beta/        # Project-specific details
+│   └── ...
+├── architecture/            # Platform architecture documentation
+├── runbooks/               # Operational procedures
+├── migration-guides/       # Transition documentation
+└── contact-info/           # Team contacts and escalation paths
+```
 
-- `app.py`: Main Flask application
-- `templates/`: HTML templates
-- `static/`: Static files (CSS, JS)
-- `essay.txt`: Source text for the RAG system
-- `requirements.txt`: Python dependencies
-- `vercel.json`: Vercel deployment configuration
+## How to Ask Questions
 
-## Usage and Licensing
+When seeking information about a specific project:
 
-This project is provided as a learning resource for students and workshop participants. You are free to:
+1. **Check the project's individual documentation first**
+2. **Review the FAQ section** for commonly asked questions
+3. **Use the issue template** when creating new questions
+4. **Tag relevant team members** who have domain expertise
 
-- Use this code for educational purposes
-- Modify and adapt it for your own projects
-- Share it with others for learning
-- Use it in workshops and tutorials
+### Question Template
+When asking about a project, please include:
+- Project name
+- Specific area of concern (architecture, deployment, etc.)
+- Current issue or information needed
+- Urgency level
+- Any error messages or logs
 
-Feel free to reach out to [Halim Madi](https://www.halimmadi.com) with any questions or feedback! 
+## Key Contacts
+
+- **Platform Team Lead**: [Name] - @username
+- **DevOps Lead**: [Name] - @username  
+- **Architecture Review**: [Name] - @username
+- **Viktor (Original Owner)**: Available for transition questions until [date]
+
+## Important Notes
+
+⚠️ **Transition Period**: Some projects may still be in active handover. Check individual project status before making changes.
+
+📋 **Documentation Updates**: This documentation is actively maintained. Last updated: [Date]
+
+🔄 **Regular Reviews**: Project statuses are reviewed monthly during platform team meetings.
+
+## Contributing
+
+To update project information:
+1. Create a branch for your changes
+2. Update relevant documentation
+3. Submit a pull request with clear description of changes
+4. Tag appropriate reviewers
+
+## Support
+
+For urgent platform issues:
+- **Slack**: #platform-support
+- **On-call**: Check PagerDuty rotation
+- **Email**: platform-team@company.com
+
+For handover-specific questions:
+- **Slack**: #viktor-handover
+- **Direct**: @viktor (transition period only)
+
+---
+
+*This documentation serves as the central hub for understanding platform projects post-handover. Keep it updated and refer back frequently as projects evolve.*
